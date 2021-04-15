@@ -1,0 +1,31 @@
+:root {
+  --wheight: 300px;
+  --wwidth: 400px;
+  --barheight: 40px;
+}
+
+html {
+  height: var(--wheight);
+  width: var(--wwidth);
+}
+
+.tabButton {
+  height: calc(var(--wheight) / 2 - 35px);;
+  width: var(--wwidth) - 40px;
+  background-color: var(--white);
+  margin: auto;
+  padding: 10px;
+  font-size: 40px;
+  color: var(--black);
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 0 10px var(--grey);
+  transition: 0.3s;
+}
+
+.card:hover, .card:focus {
+  box-shadow: 0 0 15px var(--black);
+  transform: translate(0, -2px);
+}

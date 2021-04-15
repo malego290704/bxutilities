@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html id="popupPage">
+  <head>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel="stylesheet" href="universal_style.css">
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="popup_tab.css">
+    <link rel="stylesheet" href="popup_passwordTab.css">
+    <link rel="stylesheet" href="popup_bookmarkTab.css">
+  </head>
+  <body>
+    <div class="tabButton card noselection quickcentercontent clickable" id="openPasswordTab">Password</div>
+    <div style="height:10px;"></div>
+    <div class="tabButton card noselection quickcentercontent clickable" id="openBookmarkTab">Bookmark</div>
+    <div id="passwordTab" class="newTab">
+      <div class="topNavigationBar">
+        <a class="closeButton noselection clickable quickcentercontent" id="closePasswordTab">&times;</a>
+      </div>
+      <div id="tabLock" class="quickcentercontent noselection clickable" style="fontSize:20px">
+        You have not set up the generator. Click here to setup.
+      </div>
+      <div class="tabContent noselection">
+        <a>Get a generated password</a>
+        <br>
+        <label for="passwordBox" style="font-size:20px;">Enter your password:</label>
+        <br>
+        <div style="margin:5px 0px;">
+          <input type="password" id="passwordBox" class="textbox" placeholder="Password"></input>
+          <span id="getPasswordButton" class="actionButtonPasswordTab clickable">Get password</span>
+        </div>
+        <div style="margin:5px 0px;">
+          <input type="password" id="passwordOutputBox" class="textbox" placeholder="Your generated password" readonly></input>
+          <span id="copyPasswordButton" class="actionButtonPasswordTab clickable">Copy password</span>
+        </div>
+        <div style="margin:10px -5px">
+          <span id="newSaltButton" class="actionButtonPasswordTab clickable">Get a new password</span>
+        </div>
+        <div id="statusReport"></div>
+      </div>
+    </div>
+    <div id="bookmarkTab" class="newTab">
+      <div class="topNavigationBar">
+        <a class="closeButton noselection clickable quickcentercontent" id="closeBookmarkTab">&times;</a>
+      </div>
+      <div class="tabContent noselection">
+        <label for="folderSelector" style="font-size:18px;">Choose a folder</label>
+        <br>
+        <select style="margin:5px 0px;" id="folderSelector"></select>
+        <table>
+          <tr>
+            <th>
+              <label for="bookmarkLinkTitle" class="smallLabel">Title</label>
+            </th>
+            <th>
+              <input type="text" id="bookmarkLinkTitle" class="textbox2" placeholder="Title"></input>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <label for="bookmarkLinkURL" class="smallLabel">URL</label>
+            </th>
+            <th>
+              <input type="text" id="bookmarkLinkURL" class="textbox2" placeholder="URL"></input>
+            </th>
+          </tr>
+        </table>
+        <div style="margin:12px 0px"></div>
+        <div>
+          <span id="bookmarkSaveLink" class="actionButtonBookmarkTab clickable">Save bookmark</span>
+          <a style="color:var(--white);width:2px"></a>
+          <span id="bookmarkOpenFolder" class="actionButtonBookmarkTab clickable">Open bookmark folder</span>
+          <a style="color:var(--white);width:2px"></a>
+          <span id="bookmarkNewFolder" class="actionButtonBookmarkTab clickable">Create new folder</span>
+        </div>
+        <div style="margin:10px 0px"></div>
+        <div>
+          <span id="bookmarkDeleteFolder" class="actionButtonBookmarkTab clickable">Delete this folder</span>
+          <a style="color:var(--white);width:2px"></a>
+          <span id="bookmarkExportFolder" class="actionButtonBookmarkTab clickable">Export to clipboard</span>
+          <a style="color:var(--white);width:2px"></a>
+          <span id="bookmarkImportFolder" class="actionButtonBookmarkTab clickable">Import a folder</span>
+        </div>
+        <div style="margin:10px 0px"></div>
+        <div>
+          <span id="bookmarkExportEncryptFolder" class="actionButtonBookmarkTab clickable">Encrypted export</span>
+          <a style="color:var(--white);width:2px"></a>
+          <span id="bookmarkImportEncryptFolder" class="actionButtonBookmarkTab clickable">Encrypted import</span>
+        </div>
+        <div style="margin:10px 0px"></div>
+        <div id="statusReport2" style="margin:8px 0px"></div>
+      </div>
+    </div>
+    <div id="bookmarkFolderViewTab" class="newTab">
+      <div class="topNavigationBar">
+        <a class="closeButton noselection clickable quickcentercontent" id="closeBookmarkFolderTab">&times;</a>
+      </div>
+      <div id="bookmarkFolderView" class="tabContent noselection"></div>
+    </div>
+    <input type="text" value="0" id="hiddenElement" readonly style="display:none">
+    <script src="popup.js"></script>
+    <script src="sha256.js"></script>
+    <script src="sha256_ext.js"></script>
+    <script src="popup_passwordTab.js"></script>
+    <script src="popup_bookmarkTab.js"></script>
+    <script src="aes.js"></script>
+  </body>
+</html>

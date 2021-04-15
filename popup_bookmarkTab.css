@@ -1,0 +1,70 @@
+#folderSelector {
+  width: calc(var(--wwidth) - 20px);
+  height: 25px;
+  border: none;
+  border-bottom: 2px solid var(--cyan);
+  background-color: var(--white);
+  transition: 0.2s;
+}
+
+#folderSelector:focus {
+  border-bottom: 2px solid var(--blue);
+}
+
+table {
+  text-align: left;
+}
+
+.textbox2 {
+  width: calc(var(--wwidth) - 63px);
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid var(--cyan);
+  background-color: var(--white);
+  transition: 0.2s;
+}
+
+.textbox2:focus {
+  border-bottom: 2px solid var(--blue);
+  transform: translate(0, -1px);
+}
+
+.actionButtonBookmarkTab {
+  margin: 0px;
+  padding: 3px 5px;
+  background-color: var(--cyan);
+  color: var(--black);
+  font-weight: bold;
+  border-radius: 2px;
+  transition: 0.15s;
+}
+
+.actionButtonBookmarkTab:hover, .actionButtonBookmarkTab:focus {
+  box-shadow: 0 0 5px var(--blue);
+  background-color: var(--blue);
+  color: var(--white);
+  transform: translate(0, -2px);
+}
+
+/*#bookmarkFolderView {
+  height: 260px;
+  width: var(--wwidth);
+  display: block;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-color: var(--white);
+  /*overflow-x: hidden;
+  transition: 0.3s ease;
+  left: 100%;
+  color: var(--black);
+}*/
+
+.smallLabel {
+  font-weight: lighter;
+}
+
+#statusReport2 {
+  font-size: 12px;
+}

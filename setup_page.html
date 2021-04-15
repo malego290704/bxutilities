@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel="stylesheet" href="universal_style.css">
+    <link rel="stylesheet" href="setup_page.css">
+    <script src="sha256.js"></script>
+    <script src="sha256_ext.js"></script>
+  </head>
+  <body class="quickcentercontent">
+    <div class="quickcentercontent noselection" id="guiWindow">
+      <h1>Setup the password generator</h1>
+      <table>
+        <tr>
+          <th>
+            <label for="passwordBox">Enter your password: </label>
+          </th>
+          <th>
+            <input type="password" id="passwordBox" class="textbox" placeholder="Password"></input>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <label for="passwordReBox">Re-enter your password: </label>
+          </th>
+          <th>
+            <input type="password" id="passwordReBox" class="textbox" placeholder="Password"></input>
+          </th>
+        </tr>
+      </table>
+      <p class="quickcentercontent">
+        The password must be at least 6 characters, including at least a letter and a digit.
+        <br>
+        <br>
+        This password will be used to encode your generated passwords, and you will need this password to access those.
+      </p>
+      <div id="registerButton" class="clickable">Register</div>
+    </div>
+    <script src="setup_page.js"></script>
+  </body>
+</html>

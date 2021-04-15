@@ -1,0 +1,34 @@
+:root {
+  /* Color pallete
+  http://coolors.co/faf9ff-4424a9-5f5f63-080415-06c0d7-ea2b1f-e07be0-4daa57-feea00-b6b6b9
+  */
+  --white: #faf9ff;
+  --blue: #4424a9;
+  --grey: #5f5f63;
+  --black: #080415;
+  --cyan: #06c0d7;
+  --red: #ea2b1f;
+  --violet: #e07be0;
+  --green: #4daa57;
+  --yellow: #feea00;
+  --lightgrey: #b6b6b9;
+}
+
+html {
+  font-family: Roboto, Arial;
+}
+
+.noselection {
+  user-select: none;
+}
+
+.quickcentercontent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.clickable {
+  cursor: pointer;
+}

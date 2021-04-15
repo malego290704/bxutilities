@@ -1,0 +1,17 @@
+{
+  "name": "BXUtilities",
+  "description": "Extra utilities for Chrome",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "64": "bxu_logo_64.png",
+    "128": "bxu_logo_128.png"
+  }
+}

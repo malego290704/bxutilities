@@ -1,0 +1,52 @@
+body {
+  background-color: var(--cyan);
+}
+
+#guiWindow {
+  margin: 40px;
+  background-color: var(--white);
+  height: 400px;
+  width: 600px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 20px var(--grey);
+  /*text-align: center;*/
+}
+
+#guiWindow table {
+  border-spacing: 10px;
+}
+
+.textbox {
+  width: 200px;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid var(--cyan);
+  background-color: var(--white);
+  transition: 0.2s;
+}
+
+.textbox:focus {
+  border-bottom: 2px solid var(--blue);
+  transform: translate(0, -1px);
+}
+
+#guiWindow p {
+  height: 100px;
+  padding: 0px 60px;
+}
+
+#registerButton {
+  padding: 10px 30px;
+  background-color: var(--cyan);
+  color: var(--black);
+  font-weight: bold;
+  border-radius: 2px;
+  transition: 0.2s;
+}
+
+#registerButton:hover, #registerButton:focus {
+  box-shadow: 0 0 5px var(--blue);
+  background-color: var(--blue);
+  color: var(--white);
+  transform: translate(0, -1px);
+}

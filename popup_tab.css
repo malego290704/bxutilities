@@ -1,0 +1,36 @@
+.newTab {
+  height: var(--wheight);
+  width: var(--wwidth);
+  display: block;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--white);
+  overflow-x: hidden;
+  transition: 0.3s ease;
+  left: 100%;
+  color: var(--black);
+}
+
+.topNavigationBar {
+  height: var(--barheight);
+  background-color: var(--grey);
+  box-shadow: 0 0 10px var(--grey);
+}
+
+.closeButton {
+  height: calc(var(--barheight) * 0.8);
+  width: calc(var(--barheight));
+  font-size: calc(var(--barheight) - 10px);
+  color: var(--white);
+  transition: 0.2s;
+}
+
+.closeButton:hover {
+  text-shadow: 0 0 5px var(--white);
+}
+
+.tabContent {
+  padding: 10px;
+}
