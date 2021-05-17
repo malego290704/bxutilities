@@ -24,16 +24,18 @@
         <br>
         <label for="passwordBox" style="font-size:20px;">Enter your password:</label>
         <br>
-        <div style="margin:5px 0px;">
+        <div style="margin:10px 0px;">
           <input type="password" id="passwordBox" class="textbox" placeholder="Password"></input>
           <span id="getPasswordButton" class="actionButtonPasswordTab clickable">Get password</span>
         </div>
-        <div style="margin:5px 0px;">
+        <div style="margin:10px 0px;">
           <input type="password" id="passwordOutputBox" class="textbox" placeholder="Your generated password" readonly></input>
           <span id="copyPasswordButton" class="actionButtonPasswordTab clickable">Copy password</span>
         </div>
-        <div style="margin:10px -5px">
+        <div style="margin:15px -5px">
           <span id="newSaltButton" class="actionButtonPasswordTab clickable">Get a new password</span>
+          <span id="exportSaltButton" class="actionButtonPasswordTab clickable">Export a backup</span>
+          <span id="importSaltButton" class="actionButtonPasswordTab clickable">Import a backup</span>
         </div>
         <div id="statusReport"></div>
       </div>
@@ -67,23 +69,23 @@
         <div style="margin:12px 0px"></div>
         <div>
           <span id="bookmarkSaveLink" class="actionButtonBookmarkTab clickable">Save bookmark</span>
-          <a style="color:var(--white);width:2px"></a>
+          <a style="color:var(--white);width:10px"></a>
           <span id="bookmarkOpenFolder" class="actionButtonBookmarkTab clickable">Open bookmark folder</span>
-          <a style="color:var(--white);width:2px"></a>
+          <a style="color:var(--white);width:10px"></a>
           <span id="bookmarkNewFolder" class="actionButtonBookmarkTab clickable">Create new folder</span>
         </div>
-        <div style="margin:10px 0px"></div>
+        <div style="margin:11px 0px"></div>
         <div>
           <span id="bookmarkDeleteFolder" class="actionButtonBookmarkTab clickable">Delete this folder</span>
-          <a style="color:var(--white);width:2px"></a>
+          <a style="color:var(--white);width:10px"></a>
           <span id="bookmarkExportFolder" class="actionButtonBookmarkTab clickable">Export to clipboard</span>
-          <a style="color:var(--white);width:2px"></a>
+          <a style="color:var(--white);width:10px"></a>
           <span id="bookmarkImportFolder" class="actionButtonBookmarkTab clickable">Import a folder</span>
         </div>
-        <div style="margin:10px 0px"></div>
+        <div style="margin:11px 0px"></div>
         <div>
           <span id="bookmarkExportEncryptFolder" class="actionButtonBookmarkTab clickable">Encrypted export</span>
-          <a style="color:var(--white);width:2px"></a>
+          <a style="color:var(--white);width:10px"></a>
           <span id="bookmarkImportEncryptFolder" class="actionButtonBookmarkTab clickable">Encrypted import</span>
         </div>
         <div style="margin:10px 0px"></div>

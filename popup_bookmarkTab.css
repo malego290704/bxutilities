@@ -30,7 +30,7 @@ table {
 }
 
 .actionButtonBookmarkTab {
-  margin: 0px;
+  margin: 2px;
   padding: 3px 5px;
   background-color: var(--cyan);
   color: var(--black);

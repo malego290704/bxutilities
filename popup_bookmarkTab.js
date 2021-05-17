@@ -11,12 +11,12 @@ openBookmarkTab.addEventListener("click", async () => {
   bookmarkLinkURL.value = _currentTab.url;
   chrome.storage.local.get("bookmarkDatabase", ({bookmarkDatabase}) => {
     currentBookmarkDatabase = bookmarkDatabase;
-    console.log('bookmarkDatabase currently is ' + bookmarkDatabase);
+    //console.log('bookmarkDatabase currently is ' + bookmarkDatabase);
     for (const [bookmarkFolder, bookmarkFolderData] of Object.entries(bookmarkDatabase)) {
       var _option = document.createElement("option");
       _option.text = bookmarkFolder;
       folderSelector.add(_option);
-      console.log(bookmarkFolder, bookmarkFolderData);
+      //console.log(bookmarkFolder, bookmarkFolderData);
     };
     _option = document.createElement("option");
     _option.text = "Trash can";
@@ -36,8 +36,12 @@ bookmarkSaveLink.addEventListener("click", async () => {
     currentBookmarkDatabase[folderSelector.value][bookmarkLinkURL.value] = bookmarkLinkTitle.value;
   };
   chrome.storage.local.set({bookmarkDatabase: currentBookmarkDatabase}, function() {
-    console.log('bookmarkDatabase is set to ' + currentBookmarkDatabase);
-    statusReport2.innerHTML = "Link bookmarked in the ''" + folderSelector.value + "'' folder";
+    //console.log('bookmarkDatabase is set to ' + currentBookmarkDatabase);
+    if (folderSelector.value != "Trash can") {
+      statusReport2.innerHTML = "Link bookmarked in the ''" + folderSelector.value + "'' folder.";
+    } else {
+      statusReport2.innerHTML = "Bookmark deleted."
+    }
   });
 });
 
@@ -47,7 +51,7 @@ bookmarkFolderView = document.getElementById("bookmarkFolderView");
 function getBookmarkLinkBox(_title, _url, _index) {
   var _temp = document.createElement("a");
   _temp.className = "clickable";
-  _temp.style.padding = "3px";
+  _temp.style.padding = "3px 5px";
   _temp.style.margin = "3px 0px";
   _temp.style.fontSize = "15px";
   _temp.style.background = "var(--lightgrey)";
@@ -75,6 +79,12 @@ bookmarkOpenFolder.addEventListener("click", async () => {
     bookmarkFolderView.appendChild(_temp);
     _index++;
   };
+  _temp2 = document.createElement("div");
+  _temp2.style.height = "5px";
+  _temp2.style.width = "100%";
+  _temp2.style.top = (_index * 35 + 50) + "px";
+  _temp2.style.position = "absolute";
+  bookmarkFolderView.appendChild(_temp2);
   bookmarkFolderViewTab.style.left = "0%";
 });
 
@@ -130,11 +140,11 @@ function importBookmarkFolder(_input_s) {
   if (_temp != null) {
     try {
       var _temp2 = _temp.slice(0, _temp.indexOf("(}{##}{)"));
-      console.log(_temp2);
+      //console.log(_temp2);
       var _temp3 = _temp.replace(_temp2 + "(}{##}{)", "");
-      console.log(_temp3);
+      //console.log(_temp3);
       var _temp4 = JSON.parse(_temp3);
-      console.log(_temp4);
+      //console.log(_temp4);
       for (const [bookmarkedURL, bookmarkedLink] of Object.entries(_temp4)) {
         if (currentBookmarkDatabase[_temp2] == undefined) {
           currentBookmarkDatabase[_temp2] = {};
@@ -175,9 +185,9 @@ bookmarkExportEncryptFolder.addEventListener("click", async () => {
   var _temp = JSON.stringify(currentBookmarkDatabase[folderSelector.value]);
   var _temp2 = folderSelector.value + "(}{##}{)" + _temp;
   var _temp3 = prompt("Choose a password to encrypt the content");
-  var _temp4 = CryptoJS.AES.encrypt(_temp2, _temp3);
+  var _temp4 = CryptoJS.AES.encrypt(_temp2, sha256Base64(_temp3));
   copyTextToClipboard(_temp4);
-  statusReport2.innerHTML = "Folder '" + folderSelector.value + "' exported (encrypted)";
+  statusReport2.innerHTML = "Folder '" + folderSelector.value + "' exported (encrypted).";
 });
 
 bookmarkImportEncryptFolder.addEventListener("click", async () => {
@@ -185,7 +195,7 @@ bookmarkImportEncryptFolder.addEventListener("click", async () => {
   var _temp = prompt("Enter the folder data");
   var _temp2 = prompt("Enter the password");
   if (_temp != null) {
-    var _temp3 = CryptoJS.AES.decrypt(_temp, _temp2);
+    var _temp3 = CryptoJS.AES.decrypt(_temp, sha256Base64(_temp2));
     var _temp4 = _temp3.toString(CryptoJS.enc.Utf8);
     importBookmarkFolder(_temp4);
   }

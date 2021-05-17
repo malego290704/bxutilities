@@ -23,15 +23,15 @@ function passwordChecker(_input_s) {
   var userPasswordH2Data;
   return new Promise(function(resolve, reject) {
     chrome.storage.local.get("userPasswordH2", ({userPasswordH2}) => {
-      console.log('Value currently is ' + userPasswordH2);
-      console.log('Value type currently is ' + typeof(userPasswordH2));
-      console.log(userPasswordH2);
+      //console.log('Value currently is ' + userPasswordH2);
+      //console.log('Value type currently is ' + typeof(userPasswordH2));
+      //console.log(userPasswordH2);
       userPasswordH2Data = userPasswordH2;
-      console.log(userPasswordH2Data);
+      //console.log(userPasswordH2Data);
       var _temp = sha256Base64(_input_s);
       var _temp2 = sha256Base64(_temp + userPasswordH2Data[1]);
-      console.log(_temp2);
-      console.log(userPasswordH2Data[0]);
+      //console.log(_temp2);
+      //console.log(userPasswordH2Data[0]);
       resolve(_temp2 == userPasswordH2Data[0]);
     });
   });
@@ -98,10 +98,10 @@ async function passwordOutputBoxUpdate(resalt) {
     console.log(_temp1);
     _temp2 = sha256Base64(passwordBox.value + await getMasterPasswordSalt());
     _temp3 = _temp1 + "($0)" + _temp2;
-    console.log(_temp3);
+    //console.log(_temp3);
     _database = await getPasswordSaltDatabase();
-    console.log(_database);
-    console.log(_database[_temp1]);
+    //console.log(_database);
+    //console.log(_database[_temp1]);
     //statusReport.innerHTML += " " + _database[_temp1];
     if (_database[_temp1] == undefined || resalt) {
       var _salt_complexity = 1000000000;
@@ -110,9 +110,9 @@ async function passwordOutputBoxUpdate(resalt) {
     }
     _temp4 = sha256Base64(_temp3 + _database[_temp1]);
     passwordOutputBox.value = _temp4;
-    console.log(_temp4);
+    //console.log(_temp4);
     chrome.storage.local.set({passwordSaltDatabase: _database}, function() {
-      console.log('Value is set to ' + _database);
+      //console.log('Value is set to ' + _database);
     });
   } else {
     statusReport.innerHTML = "Wrong password.";
@@ -177,4 +177,64 @@ newSaltButton.addEventListener("click", async () => {
     await passwordOutputBoxUpdate(true);
     statusReport.innerHTML = "New password generated";
   };
+});
+
+exportSaltButton = document.getElementById("exportSaltButton");
+exportSaltButton.addEventListener("click", async () => {
+  statusReport.innerHTML = "Checking password";
+  console.log("Checking password");
+  var _temp = passwordBox.value;
+  _state = false;
+  _state = await passwordChecker(_temp);
+  if (_state == false) {
+    statusReport.innerHTML = "Wrong password.";
+    return;
+  };
+  var _saltBank = await getPasswordSaltDatabase();
+  _saltBank["master|" + sha256Base64(_temp)] = await getMasterPasswordSalt();
+  //console.log(_saltBank);
+  var _saltBankText = JSON.stringify(_saltBank);
+  var _saltBankTextEncrypted = CryptoJS.AES.encrypt(_saltBankText, sha256Base64(_temp));
+  copyTextToClipboard(_saltBankTextEncrypted);
+  statusReport.innerHTML = "Backup data copied to clipboard.";
+});
+
+
+importSaltButton = document.getElementById("importSaltButton");
+importSaltButton.addEventListener("click", async () => {
+  console.log("Checking password");
+  var _temp = passwordBox.value;
+  _state = false;
+  _state = await passwordChecker(_temp);
+  if (_state == false) {
+    statusReport.innerHTML = "Wrong password.";
+    return;
+  };
+  if (!confirm("All passwords will be overriden. Continue?")) {
+    statusReport.innerHTML = "Backup import halted.";
+    return;
+  };
+  var _temp2 = prompt("Enter the backup data");
+  if (_temp2 != null) {
+    var _temp3 = CryptoJS.AES.decrypt(_temp2, sha256Base64(_temp));
+    var _temp4 = _temp3.toString(CryptoJS.enc.Utf8);
+    //console.log(_temp4);
+    try {
+      var _temp5 = JSON.parse(_temp4);
+      //console.log(_temp5);
+      var _temp6 = sha256Base64(_temp);
+      var _salt = _temp5["master" + sha256Base64(_temp)];
+      var _temp7 = sha256Base64(_temp6 + _salt);
+      var _data_package = [_temp7, _salt];
+      await chrome.storage.local.set({userPasswordH2: _data_package}, function() {
+        //console.log('userPasswordH2 is set to ' + _data_package);
+      });
+      await chrome.storage.local.set({passwordSaltDatabase: _temp5}, function() {
+        //console.log('Value is set to ' + _temp5);
+        statusReport.innerHTML = "Backup imported.";
+      });
+    } catch(err) {
+      statusReport2.innerHTML = "Import unsuccessful."
+    }
+  }
 });
